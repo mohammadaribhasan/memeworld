@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sultan's Dine Offer!</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a1a; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; color: white; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; width: 85%; color: #333; }
+        .card img { width: 100%; border-radius: 10px; }
+        h2 { color: #d35400; margin-top: 15px; }
+        .btn { background: #ff4757; color: white; padding: 15px 30px; border: none; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; width: 100%; box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4); }
+        
+        /* Hacked Overlay */
+        #hacker-screen {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black; color: #00ff00; flex-direction: column; justify-content: center;
+            align-items: center; z-index: 9999; text-align: center; font-family: 'Courier New', Courier, monospace; padding: 20px;
+        }
+        .glitch-text { font-size: 22px; margin: 10px 0; }
+        #timer { font-size: 14px; color: #555; margin-top: 20px; }
+        
+        /* Final April Fool Text */
+        #reveal { display: none; font-size: 40px; font-weight: bold; color: #ff0000; animation: bounce 0.5s infinite alternate; }
+        .credit { font-size: 18px; color: #fff; margin-top: 20px; font-style: italic; opacity: 0.8; }
+        
+        @keyframes bounce { from { transform: scale(1); } to { transform: scale(1.1); } }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="main-card">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1000&auto=format&fit=crop" alt="Pizza">
+        <h2>Free Pizza Coupon! 🍕</h2>
+        <p>Congratulations! You won a family size pizza. Click below to claim.</p>
+        <button class="btn" onclick="startPrank()">CLAIM NOW</button>
+    </div>
+
+    <div id="hacker-screen">
+        <div id="hacker-logs">
+            <p class="glitch-text">INITIALIZING HACK...</p>
+            <p>Accessing Internal Storage...</p>
+            <p>IP Address: 192.168.1.103 [FOUND]</p>
+            <p>Uploading Private Data to Cloud... 67%</p>
+            <p style="color: red;">CRITICAL ERROR: SYSTEM COMPROMISED</p>
+        </div>
+
+        <div id="reveal">
+            APRIL FOOL! HAHA! 😂
+            <div class="credit">Developed by Arib</div>
+        </div>
+        
+        <p id="timer">Device will self-destruct in 60s...</p>
+    </div>
+
+    <script>
+        function startPrank() {
+            // Fullscreen attempt
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+
+            document.getElementById('main-card').style.display = 'none';
+            document.getElementById('hacker-screen').style.display = 'flex';
+
+            let seconds = 60;
+            const timerElement = document.getElementById('timer');
+            const logs = document.getElementById('hacker-logs');
+            const reveal = document.getElementById('reveal');
+
+            // Block back button
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function() {
+                window.history.go(1);
+            };
+
+            const countdown = setInterval(() => {
+                seconds--;
+                timerElement.innerText = "System Locked: " + seconds + "s remaining";
+                
+                if (seconds <= 0) {
+                    clearInterval(countdown);
+                    logs.style.display = 'none';
+                    timerElement.style.display = 'none';
+                    reveal.style.display = 'block';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
