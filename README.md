@@ -1,2 +1,2 @@
 # memeworld is meming
-(Live Link)[https://meme-zoo.netlify.app/]
+[Live Link](https://meme-zoo.netlify.app/)
